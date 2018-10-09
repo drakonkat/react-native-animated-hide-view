@@ -36,7 +36,7 @@ Prop                  | Type     | Default  | Required           | Description
 visible               | bool     | -        | :heavy_check_mark: | Show/Hide the View
 duration              | int      | 500      |                    | Animation time (ms)
 unmountOnHide         | bool     | false    |                    | Unmount component when visible === false
-animateBeforeUnmount  | bool     | false    |                    | Unmount component when visible === false
+animateBeforeUnmount  | bool     | false    |                    | Execute the animation before Unmount when visible === false
 animated              | bool     | true     |                    | If false, disables the animation
 style                 | style    | {}       |                    | Custom style to be passed to the wrapper Animated.View **(*)**
 children              | node     | -        | :heavy_check_mark: | Children components
