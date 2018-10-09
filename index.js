@@ -11,6 +11,7 @@ export default class AnimatedHideView extends PureComponent {
     visible: PropTypes.bool.isRequired,
     duration: PropTypes.number,
     unmountOnHide: PropTypes.bool,
+    animateBeforeUnmount: PropTypes.bool,
     animate: PropTypes.bool,
     style: ViewPropTypes.style,
     children: PropTypes.node.isRequired,
@@ -20,6 +21,7 @@ export default class AnimatedHideView extends PureComponent {
     duration: 300,
     animate: true,
     unmountOnHide: false,
+    animateBeforeUnmount: false,
     style: {},
   }
 
@@ -51,6 +53,7 @@ export default class AnimatedHideView extends PureComponent {
   render() {
     const {
       unmountOnHide,
+      animateBeforeUnmount,
       visible,
       style,
       children,
@@ -64,8 +67,14 @@ export default class AnimatedHideView extends PureComponent {
 
     const pointerEvents = visible ? 'auto' : 'none';
 
-    if (unmountOnHide && !visible) {
-      return null;
+    if(animateBeforeUnmount){
+      if (unmountOnHide && !visible && this.opacity === 0) {
+        return null;
+      }
+    }else{
+      if (unmountOnHide && !visible) {
+        return null;
+      }
     }
 
     return (
