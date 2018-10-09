@@ -47,7 +47,11 @@ export default class AnimatedHideView extends PureComponent {
       toValue: visible ? 0 : 1,
       duration: animate ? duration : 0,
       useNativeDriver: true,
-    }).start();
+    }).start(() => {
+      this.setState(
+        { animationTerminated: visible }
+      )
+    });
   }
 
   render() {
@@ -66,12 +70,12 @@ export default class AnimatedHideView extends PureComponent {
     };
 
     const pointerEvents = visible ? 'auto' : 'none';
-
-    if(animateBeforeUnmount){
-      if (unmountOnHide && !visible && this.opacity === 0) {
+    let animationTerminated = (this.state && this.state.animationTerminated && this.state.animationTerminated)
+    if (animateBeforeUnmount) {
+      if (unmountOnHide && !visible && animationTerminated) {
         return null;
       }
-    }else{
+    } else {
       if (unmountOnHide && !visible) {
         return null;
       }
